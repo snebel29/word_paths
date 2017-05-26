@@ -22,22 +22,23 @@ Examples:
   word_ladder from word1 to word2 using /english.dict -a
 """
 
+import sys
 from docopt import docopt
 from word_ladder import WordLadder, __version__
 
-def run_ladder(args):
+def main(args):
     result = WordLadder(
-        args['<dict_file>'], bool(len(args['<from>']) != len(args['<to>']))).find_path(
+        args['<dict_file>']).find_path(
             args['<from>'],
             args['<to>'],
             bool(args['--all-paths']
         )
     )
 
-    print('path: {0}'.format(result))
+    return result
 
-def main():
-    run_ladder(docopt(__doc__, version=__version__))
+def parse_args(args=sys.argv):
+    return docopt(__doc__, args, version=__version__)
 
 if __name__ == '__main__':
-    main()
+    print('path: {0}'.format(main(parse_args())))
