@@ -37,7 +37,7 @@ def run(args):
 
     return result
 
-def parse_args(args=sys.argv):
+def parse_args(args=sys.argv[1:]):
     return docopt(__doc__, args, version=__version__)
 
 def main():
